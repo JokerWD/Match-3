@@ -58,3 +58,20 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+UserSettings/Layouts/default-2021.dwlt
+
+# Unity3D generated meta files
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+
+# Unity3D generated file on crash reports
+sysinfo.txt
+
+# Builds
+*.apk
+*.unitypackage
+
+# Crashlytics generated file
+crashlytics-build.properties
+
