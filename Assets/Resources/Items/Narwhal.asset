@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52cc48794efcd6c4b83c0f201a4e356b, type: 3}
   m_Name: Narwhal
   m_EditorClassIdentifier: 
-  value: 10
-  sprite: {fileID: 21300000, guid: 24230e05599eee84f9575806c6ded5b2, type: 3}
+  <Value>k__BackingField: 20
+  <Sprite>k__BackingField: {fileID: 21300000, guid: 24230e05599eee84f9575806c6ded5b2, type: 3}

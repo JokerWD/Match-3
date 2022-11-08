@@ -1,27 +1,31 @@
 using TMPro;
 using UnityEngine;
 
-public sealed class ScoreCounter : MonoBehaviour
+namespace Match3
 {
-    public static ScoreCounter Instance { get; private set; }
-
-    private int _score;
-
-    public int Score
+    public sealed class ScoreCounter : MonoBehaviour
     {
-        get => _score;
+        [SerializeField] private TextMeshProUGUI scoreText;
 
-        set
+        #region Score
+
+        private int _score;
+
+        public int Score
         {
-            if(_score == value) return;
+            get => _score;
 
-            _score = value;
+            set
+            {
+                if(_score == value) return;
+
+                _score = value;
             
-            scoreText.SetText($"Score = {_score}");
+                scoreText.SetText($"Score = {_score}");
+            }
         }
+        
+        #endregion
+
     }
-
-    [SerializeField] private TextMeshProUGUI scoreText;
-
-    private void Awake() => Instance = this;
 }

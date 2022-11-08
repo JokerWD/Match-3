@@ -1,6 +1,10 @@
 using UnityEngine;
 
-public sealed class Row : MonoBehaviour
+namespace Match3
 {
-    public Tile[] tiles;
+    public sealed class Row : MonoBehaviour
+    {
+        [field:SerializeField] public Tile[] tiles { get; private set; }
+    }
 }
+

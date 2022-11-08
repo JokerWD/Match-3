@@ -1,69 +1,83 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-public sealed class Tile : MonoBehaviour
+namespace Match3
 {
-    public int x;
-    public int y;
-
-    private Item _item;
-
-    public Item Item
+    public sealed class Tile : MonoBehaviour
     {
-        get => _item;
+        [field: SerializeField] public Image Icon { get; set; }
+        [SerializeField] private Button button;
+        public int X { get;  set; }
+        public int Y { get; set; }
 
-        set
-        {
-            if(_item == value) return;
-
-            _item = value;
-
-            icon.sprite = _item.sprite;
-        }
-    }
-    
-    public Image icon;
-
-    public Button button;
-
-    public Tile Left => x > 0 ? Board.Instance.Tiles[x - 1, y] : null;
-    public Tile Top => y > 0 ? Board.Instance.Tiles[x, y - 1] : null;
-    public Tile Right => x < Board.Instance.Width - 1 ? Board.Instance.Tiles[x + 1, y] : null;
-    public Tile Bottom => y < Board.Instance.Height - 1 ? Board.Instance.Tiles[x, y + 1] : null;
-
-
-    public Tile[] Neighbours => new[]
-    {
-        Left,
-        Top,
-        Right,
-        Bottom,
-    };
-    
-    
-    private void Start() => button.onClick.AddListener(() => Board.Instance.Select(this));
-
-    public List<Tile> GetConnectedTiles(List<Tile> exclude = null)
-    {
-        var result = new List<Tile> { this, };
-
-        if (exclude == null)
-        {
-            exclude = new List<Tile> { this, };
-        }
-        else
-        {
-            exclude.Add(this);
-        }
-
-        foreach (var neighbour in Neighbours)
-        {
-            if(neighbour == null || exclude.Contains(neighbour) || neighbour.Item != Item) continue;
-            
-            result.AddRange(neighbour.GetConnectedTiles(exclude));
-        }
+        #region Item
         
-        return result;
+        private Item _item;
+        public Item Item
+        {
+            get => _item;
+            set
+            {
+                if(_item == value) return;
+                
+                _item = value;
+                
+                Icon.sprite = _item.Sprite;
+            }
+        }
+
+        #endregion
+
+        private Board _board;
+        #region Zenject
+
+        [Inject]
+        private void Construct(Board board) => _board = board;
+
+        #endregion
+        
+        #region Neighbours
+        
+        private Tile Left => X > 0 ? _board.Tiles[X - 1, Y] : null;
+        private Tile Top => Y > 0 ? _board.Tiles[X, Y - 1] : null;
+        private Tile Right => X < _board.Width - 1 ? _board.Tiles[X + 1, Y] : null;
+        private Tile Bottom => Y < _board.Height - 1 ? _board.Tiles[X, Y + 1] : null;
+        
+        public Tile[] Neighbours => new[]
+        {
+            Left,
+            Top,
+            Right,
+            Bottom,
+        };
+        
+        #endregion
+        
+        private void Start() => button.onClick.AddListener(() => _board.Select(this));
+    
+        public List<Tile> GetConnectedTiles(List<Tile> exclude = null)
+        {
+            var result = new List<Tile> { this, };
+    
+            if (exclude == null)
+            {
+                exclude = new List<Tile> { this, };
+            }
+            else
+            {
+                exclude.Add(this);
+            }
+    
+            foreach (var neighbour in Neighbours)
+            {
+                if(neighbour == null || exclude.Contains(neighbour) || neighbour.Item != Item) continue;
+                
+                result.AddRange(neighbour.GetConnectedTiles(exclude));
+            }
+            
+            return result;
+        }
     }
 }

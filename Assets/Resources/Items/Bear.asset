@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52cc48794efcd6c4b83c0f201a4e356b, type: 3}
   m_Name: Bear
   m_EditorClassIdentifier: 
-  value: 20
-  sprite: {fileID: 21300000, guid: ec7eb2a9e206e6c4aa3b59ffeed83be2, type: 3}
+  <Value>k__BackingField: 10
+  <Sprite>k__BackingField: {fileID: 21300000, guid: ec7eb2a9e206e6c4aa3b59ffeed83be2, type: 3}

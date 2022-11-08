@@ -1,9 +1,11 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Match-3/Item")]
-public sealed class Item : ScriptableObject
+namespace Match3
 {
-    public int value;
-    
-    public Sprite sprite;
+    [CreateAssetMenu(menuName = "Match-3/Item")]
+    public sealed class Item : ScriptableObject
+    {
+        [field:SerializeField] public int Value { get; private set; }
+        [field:SerializeField] public Sprite Sprite { get; private set; }
+    }
 }

@@ -211,7 +211,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63502c8a491117347a6e05b9f5f63405, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  x: 0
-  y: 0
-  icon: {fileID: 9032859325580662444}
+  <Icon>k__BackingField: {fileID: 9032859325580662444}
   button: {fileID: 9032859326198584183}
